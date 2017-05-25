@@ -15,8 +15,6 @@ def toBinary(string):
 
 def anagrams(lcount, remains, sofar=()):
     if not any(lcount):
-        #if not duplicates...
-        #if len(sofar) == len(set(sofar)):
         wordList.append(' '.join(sorted(sofar, key=len, reverse=True)))
     for j, word in enumerate(remains):
         ncount = tuple(x - y for x, y in zip(lcount, counts[word]))
