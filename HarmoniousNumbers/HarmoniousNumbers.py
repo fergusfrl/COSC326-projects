@@ -1,5 +1,6 @@
 #Fergus Farrell
 #Etude 9 - Harmonious Numbers
+#Too Slow!!
 
 import math
 
