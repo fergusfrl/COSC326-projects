@@ -31,7 +31,7 @@ letters = 'abcdefghijklmnopqrstuvwxyz'
 wordCount = lambda w: tuple(w.count(c) for c in letters)
 counts = dict((word, wordCount(word)) for word in words)
 within = lambda c1, c2: all(x <= y for x, y in zip(c1, c2))
-word = sys.argv[1]
+word = sys.argv[1].lower()
 inputWord = wordCount(word)
 maxNumWords = int(sys.argv[2])
 words = filter(lambda w: within(counts[w], inputWord), words)
