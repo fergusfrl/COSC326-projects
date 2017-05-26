@@ -2,15 +2,32 @@
 #Etude 7 - Finding Anagrams
 import sys
 
-def toBinary(string):
-  binaryList = []
-  for i in range(len(string)):
-    if string[i] != ' ':
-      binaryList.append('0')
-    else:
-      binaryList.append('1')
-  binaryString = ''.join(str(x) for x in binaryList)
-  return int(binaryString, 2)
+
+def binarySort(wList):
+    global binaryList
+    global maximum
+    global binaryListList
+    for i in range(len(wList)):
+        for j in range(len(wList[i])):
+            if wList[i][j] != ' ':
+                binaryList.append('0')
+            else:
+                binaryList.append('1')
+        binary = ''.join(binaryList)
+        binary = int(binary, 2)
+        if binary > maximum:
+            maximum = binary
+        if binaryListList.has_key(binary):
+            binaryListList[binary].append(wList[i])
+        else:
+            binaryListList[binary] = [wList[i]]
+        binaryList = []
+
+    for i in range(maximum + 1):
+        if binaryListList.has_key(i):
+            for j in binaryListList[i]:
+                print j
+    binaryListList = {}
 
 
 def anagrams(lcount, remains, sofar=()):
@@ -37,20 +54,19 @@ maxNumWords = int(sys.argv[2])
 words = filter(lambda w: within(counts[w], inputWord), words)
 anagrams(inputWord, words)
 
+binaryList = []
 binaryListList = {}
 wordList.sort()
 result = []
+lengthList = {}
+maximum = 0
 
+wordList.sort()
 for i in range(len(wordList)):
-    if binaryListList.has_key(toBinary(wordList[i])):
-        binaryListList[toBinary(wordList[i])].append(wordList[i])
-    else:
-        binaryListList[toBinary(wordList[i])] = [wordList[i]]
-
-for i in range(max(binaryListList) + 1):
-    if binaryListList.has_key(i):
-        for j in range(len(binaryListList[i])):
-            if binaryListList[i][j] not in result:
-                if binaryListList[i][j].count(' ') < maxNumWords:
-                    print binaryListList[i][j]
-                    result.append(binaryListList[i][j])
+  if lengthList.has_key(wordList[i].count(' ')):
+    lengthList[wordList[i].count(' ')].append(wordList[i])
+  else:
+    lengthList[wordList[i].count(' ')] = [wordList[i]]
+for i in range(max(lengthList)+1):
+  if lengthList.has_key(i):
+    binarySort(lengthList[i])
