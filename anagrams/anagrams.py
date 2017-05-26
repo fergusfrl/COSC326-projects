@@ -7,6 +7,7 @@ def binarySort(wList):
     global binaryList
     global maximum
     global binaryListList
+    global result
     for i in range(len(wList)):
         for j in range(len(wList[i])):
             if wList[i][j] != ' ':
@@ -26,7 +27,8 @@ def binarySort(wList):
     for i in range(maximum + 1):
         if binaryListList.has_key(i):
             for j in binaryListList[i]:
-                print j
+                if j not in result:
+                    result.append(j)
     binaryListList = {}
 
 
@@ -70,3 +72,6 @@ for i in range(len(wordList)):
 for i in range(max(lengthList)+1):
   if lengthList.has_key(i):
     binarySort(lengthList[i])
+
+for x in result:
+    print x
