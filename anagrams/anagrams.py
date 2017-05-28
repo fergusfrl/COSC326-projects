@@ -2,35 +2,27 @@
 #Etude 7 - Finding Anagrams
 import sys
 
+def toBinary(word):
+    binaryString = ''
+    for i in range(len(word)):
+        if word[i] != ' ':
+            binaryString = binaryString + '0'
+        else:
+            binaryString = binaryString + '1'
+    return int(binaryString, 2)
 
 def binarySort(wList):
-    global binaryList
-    global maximum
-    global binaryListList
-    global result
+    resultDir = {}
     for i in range(len(wList)):
-        for j in range(len(wList[i])):
-            if wList[i][j] != ' ':
-                binaryList.append('0')
-            else:
-                binaryList.append('1')
-        binary = ''.join(binaryList)
-        binary = int(binary, 2)
-        if binary > maximum:
-            maximum = binary
-        if binaryListList.has_key(binary):
-            binaryListList[binary].append(wList[i])
+        if resultDir.has_key(toBinary(wList[i])):
+            resultDir[toBinary(wList[i])].append(wList[i])
         else:
-            binaryListList[binary] = [wList[i]]
-        binaryList = []
+            resultDir[toBinary(wList[i])] = [wList[i]]
 
-    for i in range(maximum + 1):
-        if binaryListList.has_key(i):
-            for j in binaryListList[i]:
-                if j not in result:
-                    result.append(j)
-    binaryListList = {}
-
+    for i in range(max(resultDir) + 1):
+        if resultDir.has_key(i):
+            for j in range(len(resultDir[i])):
+                print resultDir[i][j]
 
 def anagrams(lcount, remains, sofar=()):
     if not any(lcount):
@@ -40,11 +32,9 @@ def anagrams(lcount, remains, sofar=()):
         nwords = filter(lambda w: within(counts[w], ncount), remains[j:])
         anagrams(ncount, nwords, sofar + (word,))
 
-
 words = []
 for line in sys.stdin:
     words.append(line[:-1])
-
 wordList = []
 letters = 'abcdefghijklmnopqrstuvwxyz'
 wordCount = lambda w: tuple(w.count(c) for c in letters)
@@ -55,23 +45,15 @@ inputWord = wordCount(word)
 maxNumWords = int(sys.argv[2])
 words = filter(lambda w: within(counts[w], inputWord), words)
 anagrams(inputWord, words)
-
-binaryList = []
-binaryListList = {}
 wordList.sort()
-result = []
-lengthList = {}
-maximum = 0
 
-wordList.sort()
+lengthDir = {}
 for i in range(len(wordList)):
-  if lengthList.has_key(wordList[i].count(' ')):
-    lengthList[wordList[i].count(' ')].append(wordList[i])
-  else:
-    lengthList[wordList[i].count(' ')] = [wordList[i]]
-for i in range(max(lengthList)+1):
-  if lengthList.has_key(i):
-    binarySort(lengthList[i])
+    if lengthDir.has_key(wordList[i].count(' ')):
+        lengthDir[wordList[i].count(' ')].append(wordList[i])
+    else:
+        lengthDir[wordList[i].count(' ')] = [wordList[i]]
 
-for x in result:
-    print x
+for i in range(maxNumWords):
+    if lengthDir.has_key(i):
+        binarySort(lengthDir[i])
