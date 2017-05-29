@@ -15,10 +15,10 @@ def binarySort(wList):
     resultDir = {}
     for i in range(len(wList)):
         if resultDir.has_key(toBinary(wList[i])):
-            resultDir[toBinary(wList[i])].append(wList[i])
+            if wList[i] not in resultDir[toBinary(wList[i])]:
+                resultDir[toBinary(wList[i])].append(wList[i])
         else:
             resultDir[toBinary(wList[i])] = [wList[i]]
-
     for i in range(max(resultDir) + 1):
         if resultDir.has_key(i):
             for j in range(len(resultDir[i])):
