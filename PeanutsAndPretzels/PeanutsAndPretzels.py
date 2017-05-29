@@ -1,6 +1,7 @@
 # Fergus Farrell
 # Etude 4 - Peanuts and Pretzels
 
+#Prints W/L table - will be unessessary in final product
 def printtable(table):
     for x in table:
         print x
@@ -8,11 +9,11 @@ def printtable(table):
 def generatetable(size, moves):
     table = []
     for i in range(size):
-        table.append(False)
+        table.append('W')
 
     for i in range(len(moves)):
         for j in range(moves[i] - 1, size, moves[i] * 2):
-            table[j] = True
+            table[j] = 'L'
     return table
 
 moves = []
@@ -28,7 +29,7 @@ printtable(peanutwinning)
 print '\nPretzel Table:'
 printtable(pretzelwinning)
 
-if peanutwinning[len(peanutwinning)-1] or pretzelwinning[len(pretzelwinning)-1]:
+if peanutwinning[len(peanutwinning)-1] == 'L' or pretzelwinning[len(pretzelwinning)-1] == 'L':
     print '\n0 0'
 else:
     print '\nIt is posible to win. How? Shhhhh.'
