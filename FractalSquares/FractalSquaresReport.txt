@@ -1,0 +1,10 @@
+Recursive.py
+- This problem is intuitively recursive with smaller repeated processes of the same method
+- Easy to understand and impelment
+- potential for a stack overflow with higher generations
+
+
+Iterative.py
+- Difficult to imagine logically (compared to recursive approach)
+- Difficult to implement
+- No chance for stack overflow
