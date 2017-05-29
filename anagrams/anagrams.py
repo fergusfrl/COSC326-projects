@@ -2,6 +2,12 @@
 #Etude 7 - Finding Anagrams
 import sys
 
+def sortString(string):
+    array = string.split(' ')
+    array.sort()
+    array.sort(key=len, reverse=True)
+    return ' '.join(array)
+
 def toBinary(word):
     binaryString = ''
     for i in range(len(word)):
@@ -46,6 +52,9 @@ maxNumWords = int(sys.argv[2])
 words = filter(lambda w: within(counts[w], inputWord), words)
 anagrams(inputWord, words)
 wordList.sort()
+
+for i in range(len(wordList)):
+    wordList[i] = sortString(wordList[i])
 
 lengthDir = {}
 for i in range(len(wordList)):
