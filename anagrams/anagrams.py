@@ -25,11 +25,14 @@ def binarySort(wList):
                 resultDir[toBinary(wList[i])].append(wList[i])
         else:
             resultDir[toBinary(wList[i])] = [wList[i]]
+    count = 0
     for i in range(max(resultDir) + 1):
         if resultDir.has_key(i):
             resultDir[i].sort()
             for j in range(len(resultDir[i])):
                 print resultDir[i][j]
+                count = count+1
+    print count
 
 def anagrams(lcount, remains, sofar=()):
     if not any(lcount):
